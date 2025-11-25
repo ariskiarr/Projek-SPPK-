@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hasil Seleksi TOPSIS & SAW</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="header">
+      <h1>Seleksi Divisi dengan Metode TOPSIS & SAW</h1>
+      <p>Upload data peserta untuk melihat hasil perhitungan</p>
+    </div>
+    <div class="container">
+      <form
+        method="POST"
+        enctype="multipart/form-data"
+        class="form-upload-horizontal"
+      >
+        <div class="custom-file-input">
+          <label for="file" class="file-label">Pilih File CSV</label>
+          <input
+            type="file"
+            id="file"
+            name="file"
+            accept=".csv"
+            required
+            style="display: none"
+          />
+        </div>
+        <button type="submit" class="btn">Upload & Proses</button>
+      </form>
+      {% if error_message %}
+      <div class="error-message">
+        <strong>Error:</strong> {{ error_message }}
+      </div>
+      {% endif %}
+      <div class="results-section">
+        {% if results_topsis or results_saw %} {% for divisi in
+        results_topsis.keys() %}
+        <div class="result-block">
+          <h2>Divisi {{ divisi }}</h2>
+          {% if results_topsis[divisi] %}
+          <div class="result-topsis">
+            <h3>Hasil TOPSIS</h3>
+            {{ results_topsis[divisi]|safe }}
+          </div>
+          {% endif %} {% if results_saw[divisi] %}
+          <div class="result-saw">
+            <h3>Hasil SAW</h3>
+            {{ results_saw[divisi]|safe }}
+          </div>
+          {% endif %}
+        </div>
+        {% endfor %} {% else %}
+        <div class="info-empty">
+          Silakan upload file CSV peserta untuk melihat hasil seleksi.
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    <script>
+      document
+        .querySelector(".file-label")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          document.getElementById("file").click();
+        });
+      document.getElementById("file").addEventListener("change", function (e) {
+        const label = document.querySelector(".file-label");
+        if (this.files.length > 0) {
+          label.textContent = this.files[0].name;
+        } else {
+          label.textContent = "Pilih File CSV";
+        }
+      });
+    </script>
+  </body>
+</html>
