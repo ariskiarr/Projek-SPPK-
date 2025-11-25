@@ -71,7 +71,7 @@ h2 {
   background: #f2f2f2;
 }
 .table-bordered {
-  border: 2px solid #007bff;
+  border: 1x solid #f2f2f2;
 }
 @media (max-width: 600px) {
   .container {
