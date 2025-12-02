@@ -6,12 +6,12 @@ Repositori ini berisi implementasi **Sistem Penunjang Pengambilan Keputusan (SPP
 
 ## 📖 Deskripsi Proyek
 
-Proyek ini dikembangkan untuk membantu mahasiswa menentukan tempat makan terbaik secara objektif dengan pendekatan **Multi-Criteria Decision Making (MCDM)**. Dua metode yang digunakan:
+Proyek ini membantu mahasiswa memilih tempat makan terbaik secara objektif dengan pendekatan **Multi-Criteria Decision Making (MCDM)**. Proses utama:
 
-- **Simple Additive Weighting (SAW)**
-- **Technique for Order Preference by Similarity to Ideal Solution (TOPSIS)**
+1. **Normalisasi data menggunakan SAW**
+2. **Perankingan akhir menggunakan TOPSIS dari hasil normalisasi SAW**
 
-Kedua metode menghasilkan ranking alternatif sehingga pengguna dapat melihat perbandingan hasil yang jelas dan objektif.
+Hasil akhir berupa satu skor dan satu ranking gabungan untuk setiap tempat makan.
 
 ---
 
@@ -19,39 +19,37 @@ Kedua metode menghasilkan ranking alternatif sehingga pengguna dapat melihat per
 
 Sistem menggunakan 8 kriteria benefit:
 
-| Kode | Kriteria | Skala |
-|------|----------|--------|
-| C1 | Harga | 1–5 |
-| C2 | Kualitas Rasa | 1–5 |
-| C3 | Jarak | 1–5 |
-| C4 | Kebersihan & Kenyamanan | 1–5 |
-| C5 | Kecepatan Pelayanan | 1–5 |
-| C6 | Variasi Menu | 1–5 |
-| C7 | Ketersediaan Tempat Duduk | 1–5 |
-| C8 | Fasilitas | 1–5 |
+| Kode | Kriteria                  | Skala |
+| ---- | ------------------------- | ----- |
+| C1   | Harga                     | 1–5   |
+| C2   | Kualitas Rasa             | 1–5   |
+| C3   | Jarak                     | 1–5   |
+| C4   | Kebersihan & Kenyamanan   | 1–5   |
+| C5   | Kecepatan Pelayanan       | 1–5   |
+| C6   | Variasi Menu              | 1–5   |
+| C7   | Ketersediaan Tempat Duduk | 1–5   |
+| C8   | Fasilitas                 | 1–5   |
 
 **Bobot kriteria:**
 
-C2: 0.25
-C1: 0.20
-C3: 0.15
-C4: 0.10
-C5: 0.10
-C6: 0.08
-C7: 0.06
-C8: 0.06
-
+- C2: 0.25
+- C1: 0.20
+- C3: 0.15
+- C4: 0.10
+- C5: 0.10
+- C6: 0.08
+- C7: 0.06
+- C8: 0.06
 
 ---
 
 ## ⭐ Fitur
 
-- Implementasi penuh metode **SAW** dan **TOPSIS**
+- Normalisasi otomatis dengan SAW
+- Perankingan akhir dengan TOPSIS
+- Satu skor dan ranking gabungan untuk setiap tempat makan
 - Dataset hasil survei mahasiswa
-- Perhitungan otomatis nilai normalisasi, pembobotan, dan ranking
-- Perbandingan hasil SAW vs TOPSIS
-- User Interface yang mudah dan interaktif 
-- analisis untuk eksplorasi data
+- User Interface modern dan interaktif
 - Struktur proyek rapi dan mudah dikembangkan
 
 ---
@@ -63,3 +61,39 @@ Clone repositori:
 ```bash
 git clone https://github.com/ariskiarr/Projek-SPPK-.git
 cd Projek-SPPK-
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## 🚀 Cara Menjalankan
+
+1. Jalankan aplikasi:
+
+```bash
+python appsppk.py
+```
+
+2. Buka browser dan akses: [http://localhost:5000](http://localhost:5000)
+3. Upload file CSV sesuai format kriteria di atas
+4. Lihat hasil ranking tempat makan
+
+---
+
+## 📂 Struktur Folder
+
+- `appsppk.py` — Main app
+- `templates/` — HTML templates
+- `static/` — CSS dan aset statis
+- `program/` — (opsional) kode tambahan
+
+---
+
+## 📄 Lisensi
+
+Proyek ini open source dan bebas digunakan untuk edukasi.
