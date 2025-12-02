@@ -17,34 +17,10 @@ app_bobot = {
     }
 }
 
-def topsis(data, weights):
-    data = data.copy()
-    X = data.iloc[:, 1:].values.astype(float)
-    norm = X / np.sqrt((X**2).sum(axis=0))
-    weighted = norm * np.array(list(weights.values()))
-    ideal_pos = weighted.max(axis=0)
-    ideal_neg = weighted.min(axis=0)
-    d_pos = np.sqrt(((weighted - ideal_pos)**2).sum(axis=1))
-    d_neg = np.sqrt(((weighted - ideal_neg)**2).sum(axis=1))
-    score = d_neg / (d_pos + d_neg)
-    data['Skor Akhir TOPSIS'] = score
-    data['Ranking TOPSIS'] = data['Skor Akhir TOPSIS'].rank(ascending=False)
-    return data.sort_values('Skor Akhir TOPSIS', ascending=False)
-
-def saw(data, weights):
-    data = data.copy()
-    X = data.iloc[:, 1:].values.astype(float)
-    norm = X / X.max(axis=0)
-    weighted = norm * np.array(list(weights.values()))
-    score = weighted.sum(axis=1)
-    data['Skor Akhir SAW'] = score
-    data['Ranking SAW'] = data['Skor Akhir SAW'].rank(ascending=False)
-    return data.sort_values('Skor Akhir SAW', ascending=False)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     results_topsis = {}
-    results_saw = {}
     error_message = None
     if request.method == 'POST':
         file = request.files.get('file')
@@ -62,10 +38,22 @@ def index():
                         available_cols = [c for c in df.columns if c in weights.keys()]
                         if len(available_cols) == len(weights):
                             sub_df = df[['Tempat Makan'] + available_cols]
-                            hasil_topsis = topsis(sub_df, weights)
-                            hasil_saw = saw(sub_df, weights)
-                            results_topsis[app] = hasil_topsis[['Tempat Makan', 'Skor Akhir TOPSIS', 'Ranking TOPSIS']].to_html(index=False, classes='table table-striped')
-                            results_saw[app] = hasil_saw[['Tempat Makan', 'Skor Akhir SAW', 'Ranking SAW']].to_html(index=False, classes='table table-bordered')
+                            # 1. Normalisasi SAW
+                            X = sub_df.iloc[:, 1:].values.astype(float)
+                            norm_saw = X / X.max(axis=0)
+                            # 2. Perhitungan TOPSIS dari hasil normalisasi SAW
+                            norm = norm_saw / np.sqrt((norm_saw**2).sum(axis=0))
+                            weighted = norm * np.array(list(weights.values()))
+                            ideal_pos = weighted.max(axis=0)
+                            ideal_neg = weighted.min(axis=0)
+                            d_pos = np.sqrt(((weighted - ideal_pos)**2).sum(axis=1))
+                            d_neg = np.sqrt(((weighted - ideal_neg)**2).sum(axis=1))
+                            score_topsis = d_neg / (d_pos + d_neg)
+                            hasil_df = sub_df[['Tempat Makan']].copy()
+                            hasil_df['Skor Akhir'] = score_topsis
+                            hasil_df['Ranking Akhir'] = hasil_df['Skor Akhir'].rank(ascending=False)
+                            hasil_df = hasil_df.sort_values('Ranking Akhir')
+                            results_topsis[app] = hasil_df[['Tempat Makan', 'Skor Akhir', 'Ranking Akhir']].to_html(index=False, classes='table table-striped')
                         else:
                             error_message = f'Kolom untuk tempat makan tidak lengkap di file CSV.'
             except Exception as e:
@@ -73,7 +61,7 @@ def index():
                 print('Error saat upload file:')
                 traceback.print_exc()
                 error_message = f'Gagal memproses file: {str(e)}'
-    return render_template('index.html', results_topsis=results_topsis, results_saw=results_saw, error_message=error_message)
+    return render_template('index.html', results_topsis=results_topsis, error_message=error_message)
 
 if __name__ == '__main__':
     app.run(debug=True)
