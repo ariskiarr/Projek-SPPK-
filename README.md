@@ -1,6 +1,6 @@
 # 📌 Projek-SPPK — Sistem Pendukung Pemilihan Tempat Makan
 
-Repositori ini berisi implementasi **Sistem Penunjang Pengambilan Keputusan (SPPK)** menggunakan metode **SAW** dan **TOPSIS** untuk menentukan **tempat makan terbaik di sekitar kampus** berdasarkan delapan kriteria penilaian.
+Repositori ini berisi implementasi **Sistem Penunjang Pengambilan Keputusan (SPPK)** menggunakan metode **SAW** dengan **TOPSIS** untuk menentukan **tempat makan terbaik di sekitar kampus** berdasarkan delapan kriteria penilaian.
 
 ---
 
