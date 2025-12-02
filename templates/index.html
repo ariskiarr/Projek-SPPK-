@@ -11,7 +11,7 @@
   </head>
   <body>
     <div class="header">
-      <h1>Seleksi Divisi dengan Metode TOPSIS & SAW</h1>
+      <h1>Seleksi Tempat Makan dengan Metode TOPSIS & SAW</h1>
       <p>Upload data peserta untuk melihat hasil perhitungan</p>
     </div>
     <div class="container">
@@ -39,19 +39,19 @@
       </div>
       {% endif %}
       <div class="results-section">
-        {% if results_topsis or results_saw %} {% for divisi in
+        {% if results_topsis or results_saw %} {% for tempat_makan in
         results_topsis.keys() %}
         <div class="result-block">
-          <h2>Divisi {{ divisi }}</h2>
-          {% if results_topsis[divisi] %}
+          <h2>Tempat Makan {{ tempat_makan }}</h2>
+          {% if results_topsis[tempat_makan] %}
           <div class="result-topsis">
             <h3>Hasil TOPSIS</h3>
-            {{ results_topsis[divisi]|safe }}
+            {{ results_topsis[tempat_makan]|safe }}
           </div>
-          {% endif %} {% if results_saw[divisi] %}
+          {% endif %} {% if results_saw[tempat_makan] %}
           <div class="result-saw">
             <h3>Hasil SAW</h3>
-            {{ results_saw[divisi]|safe }}
+            {{ results_saw[tempat_makan]|safe }}
           </div>
           {% endif %}
         </div>
