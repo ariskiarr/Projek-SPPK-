@@ -1,125 +1,65 @@
-# Projek SPPK
+# 📌 Projek-SPPK — Sistem Pendukung Pemilihan Tempat Makan
 
-Selamat datang di repositori **Projek-SPPK**!
-
-Repositori ini berisi template/contoh implementasi **Sistem Pendukung Pengambilan Keputusan (SPPK)** menggunakan Python. Anda akan menemukan kode, dataset contoh, dan dokumentasi untuk membantu pengembangan serta pengujian metode SPPK.
+Repositori ini berisi implementasi **Sistem Penunjang Pengambilan Keputusan (SPPK)** menggunakan metode **SAW** dan **TOPSIS** untuk menentukan **tempat makan terbaik di sekitar kampus** berdasarkan delapan kriteria penilaian.
 
 ---
 
-## Deskripsi Proyek
+## 📖 Deskripsi Proyek
 
-* **Nama Proyek:** Projek-SPPK
-* **Tujuan:** [Tuliskan tujuan sistem SPPK Anda, misal: memilih supplier terbaik, penilaian karyawan, pemilihan lokasi, dsb.]
-* **Metode yang Digunakan:** [Misal: AHP, TOPSIS, SAW, WP, atau kombinasi metode]
+Proyek ini dikembangkan untuk membantu mahasiswa menentukan tempat makan terbaik secara objektif dengan pendekatan **Multi-Criteria Decision Making (MCDM)**. Dua metode yang digunakan:
 
----
+- **Simple Additive Weighting (SAW)**
+- **Technique for Order Preference by Similarity to Ideal Solution (TOPSIS)**
 
-## Fitur
-
-* Menyimpan dataset contoh untuk pengujian
-* Implementasi metode pengambilan keputusan (placeholder)
-* Antarmuka sederhana (CLI / script)
-* Dokumentasi untuk instalasi dan penggunaan
+Kedua metode menghasilkan ranking alternatif sehingga pengguna dapat melihat perbandingan hasil yang jelas dan objektif.
 
 ---
 
-## Teknologi
+## 🎯 Kriteria Penilaian
 
-* **Bahasa Pemrograman:** Python
-* **Dependensi Utama:** lihat `requirements.txt` (jika tersedia)
+Sistem menggunakan 8 kriteria benefit:
+
+| Kode | Kriteria | Skala |
+|------|----------|--------|
+| C1 | Harga | 1–5 |
+| C2 | Kualitas Rasa | 1–5 |
+| C3 | Jarak | 1–5 |
+| C4 | Kebersihan & Kenyamanan | 1–5 |
+| C5 | Kecepatan Pelayanan | 1–5 |
+| C6 | Variasi Menu | 1–5 |
+| C7 | Ketersediaan Tempat Duduk | 1–5 |
+| C8 | Fasilitas | 1–5 |
+
+**Bobot kriteria:**
+
+C2: 0.25
+C1: 0.20
+C3: 0.15
+C4: 0.10
+C5: 0.10
+C6: 0.08
+C7: 0.06
+C8: 0.06
+
 
 ---
 
-## Persyaratan
+## ⭐ Fitur
 
-* Python 3.8+
-* pip
+- Implementasi penuh metode **SAW** dan **TOPSIS**
+- Dataset hasil survei mahasiswa
+- Perhitungan otomatis nilai normalisasi, pembobotan, dan ranking
+- Perbandingan hasil SAW vs TOPSIS
+- User Interface yang mudah dan interaktif 
+- analisis untuk eksplorasi data
+- Struktur proyek rapi dan mudah dikembangkan
 
 ---
 
-## Instalasi
+## 🛠 Instalasi
 
-1. **Clone repositori**
+Clone repositori:
 
 ```bash
 git clone https://github.com/ariskiarr/Projek-SPPK-.git
 cd Projek-SPPK-
-```
-
-2. **Buat virtual environment** (opsional tapi direkomendasikan)
-
-```bash
-python -m venv venv
-# Linux / macOS
-source venv/bin/activate
-# Windows (PowerShell)
-venv\Scripts\activate
-```
-
-3. **Install dependensi**
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-## Struktur Direktori (Contoh)
-
-```
-data/        -> Dataset contoh (CSV, JSON, dsb.)
-src/         -> Kode sumber (module, fungsi, model)
-notebooks/   -> Jupyter notebooks untuk eksplorasi/eksperimen
-tests/       -> Unit / integrasi test
-README.md    -> Dokumen ini
-```
-
----
-
-## Menjalankan Proyek
-
-* Menjalankan script utama:
-
-```bash
-python src/main.py
-```
-
-* Jika menggunakan notebook:
-
-```bash
-jupyter lab
-```
-
----
-
-## Contoh Penggunaan
-
-* Jalankan skrip contoh untuk menghitung peringkat alternatif menggunakan metode X dan menampilkan hasilnya.
-
----
-
-## Kontribusi
-
-Terima kasih atas minat Anda untuk berkontribusi!
-
-1. Fork repositori ini
-2. Buat branch fitur: `git checkout -b fitur-nama`
-3. Commit perubahan Anda: `git commit -m "Menambahkan fitur X"`
-4. Push ke branch Anda dan buat Pull Request
-
----
-
-## Lisensi
-
-Lisensi belum ditetapkan. Jika ingin menambahkan lisensi, buat file `LICENSE` (mis. MIT) dan perbarui bagian ini.
-
----
-
-## Kontak
-
-* **Pembuat:** ariskiarr
-* **URL:** [https://github.com/ariskiarr/Projek-SPPK-](https://github.com/ariskiarr/Projek-SPPK-)
-
----
-
-
